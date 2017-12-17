@@ -9,6 +9,7 @@ Open the file called _data.dinner_, and input each piece of data for each person
 * Availability, in binary format
 	* 0-1 if available at the following time periods, so the result is a word with 5 booleans:
 	* 6:00-6:29, 6:30-6:59, 7:00-7:29, 7:30-7:59, 8:00-8:29
+
 Example, for a person Yoji who is available from 6:00-6:59 and 8:00-8:29:
 * Yoji 11001
 
