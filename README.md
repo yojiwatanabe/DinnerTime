@@ -14,6 +14,7 @@ Example, for a person Yoji who is available from 6:00-6:59 and 8:00-8:29:
 * Yoji 11001
 
 *Example _data.dinner_*
+
 '''
 Yoji 11001
 Mauri 00101
