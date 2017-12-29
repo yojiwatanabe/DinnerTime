@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
+
 """
 Dinner Time Optimizer
 dinner.py
 
-Dinner time optimizer using a genetic annealing algorithm 
+Dinner time optimizer using a simple modified genetic annealing algorithm .
 """
-# -*- coding: utf-8 -*-
 
 from numpy import zeros
 from DayAnswer import *
@@ -15,6 +16,11 @@ POSSIBLE_TIMES		= 5
 DINNER_TIMES		= ["6:00", "6:30", "7:00", "7:30", "8:00"]
 DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]
 
+#				createWeekSolution()
+#
+# Creates an array of DayAnswer solutions to represent an entire week's worth of
+# dinners. Uses createSolution() to generate an answer for each day. Takes in a 
+# People object to pass to createSolution().
 def createWeekSolution(people):
 	weekAnswer = []
 	for i in range(DINNERS_PER_WEEK):
@@ -24,8 +30,10 @@ def createWeekSolution(people):
 	return weekAnswer
 
 #				createSolution()
-# Creates a DayAnswer solution
 #
+# Creates a DayAnswer solution with a pseudorandom dinner time for a given day
+# and already updates the fitness for the answer generated. Takes in a People
+# object and a day_id (e.g. Monday = 0). Used by createWeekSolution().
 def createSolution(people, day_id):
 	dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
 	answer 		= DayAnswer(dinnerTime)
@@ -55,13 +63,13 @@ def printPeople(people):
 	for peep in people.people:
 		print str(peep.name) + "\t\t" + str(peep.personId) + "\t\t",
 
-		for j in range(0, DINNERS_PER_WEEK):
+		for j in range(DINNERS_PER_WEEK):
 			# Print day of the week (stylized)
 			if j == 0: 	print DINNER_DAYS[j],
 			else:		print "\t\t\t\t" + DINNER_DAYS[j],
 
 			# Print times available
-			for i in range(0, POSSIBLE_TIMES):
+			for i in range(POSSIBLE_TIMES):
 				if str(peep.availability[i + (j * 5)]) == "1":
 					print DINNER_TIMES[i],
 			print
@@ -71,11 +79,14 @@ def printPeople(people):
 
 #				printWeekSolution()
 #
-# Prints the calculated DayAnswer objects for a given 
+# Prints an array of DayAnswer objects that represent a week in dinners. Takes 
+# in an array of DayAnswers.
 def printWeekSolution(week):
 	for day in range(DINNERS_PER_WEEK):
 		print(DINNER_DAYS[day] + ": \t" + DINNER_TIMES[week[day].time] + 
 			" -- fit: " + str(week[day].fitness))
+		
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	guests = People("data.dinner")
