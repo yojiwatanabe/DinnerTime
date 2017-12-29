@@ -1,3 +1,5 @@
+DINNERS_PER_WEEK	= 4
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # People Object
 # Takes in a filename, gets information and initializes Person class for each
