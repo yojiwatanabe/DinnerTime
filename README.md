@@ -3,6 +3,7 @@
 _Dinner Time_ is a small application that allows users to find the optimal dinner time for people with varying availabilities.
 ***
 
+
 ####Inputting data
 
 Open the file called _data.dinner_, and input each piece of data for each person as follows, followed by a new line:
