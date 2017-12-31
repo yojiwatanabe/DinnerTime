@@ -4,6 +4,7 @@ _Dinner Time_ is a small application that allows users to find the optimal dinne
 ***
 
 *Inputting data*
+
 Open the file called _data.dinner_, and input each piece of data for each person as follows, followed by a new line:
 * Name
 * Availability, in binary format
