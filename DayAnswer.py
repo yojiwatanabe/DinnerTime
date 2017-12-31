@@ -6,6 +6,7 @@
 class DayAnswer():
 	time 	= 0
 	fitness	= 0
+	idList  = []
 
 	def __init__(self, time):
 		self.setTime(time)
@@ -14,8 +15,10 @@ class DayAnswer():
 		self.time 	= time
 
 	def setFitness(self, guests, day_id):
-		temp = 0.0
+		temp 		= 0.0
+		self.idList = [0] * guests.numPeople
 		for guest in guests.people:
-			if (guest.availability[self.time] == 1):
+			if (guest.availability[self.time] == "1"):
 				temp += 1
+				self.idList[guest.personId] = 1;
 		self.fitness = temp / guests.numPeople		

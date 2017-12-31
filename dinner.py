@@ -46,7 +46,12 @@ def createSolution(people, day_id):
 # by the genetic algorithm. Takes in a People object and an array of DayAnswer
 # objects. Uses printPeople() and printWeekSolution() functions.
 def printOutput(people, week):
-	print "~ ~ ~ ~ ~ ~ ~ ~ ~ DINNER TIME ~ ~ ~ ~ ~ ~ ~ ~ ~"
+	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+	print "#\t\t\t\t\t\t\t#"
+	print "#\t\t\tDINNER\tTIME\t\t\t#"
+	print "#\t\t\t\t\t\t\t#"
+	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+	print
 	printPeople(people)
 	print "\nCalculated dinner times:"
 	printWeekSolution(week)
@@ -83,8 +88,8 @@ def printPeople(people):
 # in an array of DayAnswers.
 def printWeekSolution(week):
 	for day in range(DINNERS_PER_WEEK):
-		print(DINNER_DAYS[day] + ": \t" + DINNER_TIMES[week[day].time] + 
-			" -- fit: " + str(week[day].fitness))
+		print DINNER_DAYS[day] + ": \t" + DINNER_TIMES[week[day].time] \
+			+ " -- fit: " + str(week[day].fitness)
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
