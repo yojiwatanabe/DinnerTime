@@ -12,40 +12,33 @@ from DayAnswer 	import *
 from people 	import *
 from random 	import randint
 
-DINNERS_PER_WEEK	= 4
 POSSIBLE_TIMES		= 5 
 DINNER_TIMES		= ["6:00", "6:30", "7:00", "7:30", "8:00"]
 DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]
 
-# #				createWeekSolution()
-# #
-# # Creates an array of DayAnswer solutions to represent an entire week's worth of
-# # dinners. Uses createSolution() to generate an answer for each day. Takes in a 
-# # People object to pass to createSolution().
-# def createWeekSolution(people):
-# 	weekAnswer = []
-# 	for i in range(DINNERS_PER_WEEK):
-# 		answer = createSolution(people, DINNER_DAYS[i])
-# 		weekAnswer.append(answer)
-
-# 	return weekAnswer
-
-# #				createSolution()
-# #
-# # Creates a DayAnswer solution with a pseudorandom dinner time for a given day
-# # and already updates the fitness for the answer generated. Takes in a People
-# # object and a day_id (e.g. Monday = 0). Used by createWeekSolution().
-# def createSolution(people, day_id):
-# 	dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
-# 	answer 		= DayAnswer(dinnerTime)
-# 	answer.setFitness(people, day_id)
-# 	return answer
-
-#				variabilityFitness(weekSolution)
+#				createWeekSolution()
 #
-# Calculates the variability in people of a week solution (struct of DayAnswers)
-# and sets the fitness of each week accordingly
+# Creates an array of DayAnswer solutions to represent an entire week's worth of
+# dinners. Uses createSolution() to generate an answer for each day. Takes in a 
+# People object to pass to createSolution().
+def createWeekSolution(people):
+	weekAnswer = []
+	for i in range(DINNERS_PER_WEEK):
+		answer = createSolution(people, DINNER_DAYS[i])
+		weekAnswer.append(answer)
 
+	return weekAnswer
+
+#				createSolution()
+#
+# Creates a DayAnswer solution with a pseudorandom dinner time for a given day
+# and already updates the fitness for the answer generated. Takes in a People
+# object and a day_id (e.g. Monday = 0). Used by createWeekSolution().
+def createSolution(people, day_id):
+	dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
+	answer 		= DayAnswer(dinnerTime)
+	answer.setFitness(people, day_id)
+	return answer
 
 # 				printOutput()
 #
@@ -98,13 +91,12 @@ def printPeople(people):
 # in an array of DayAnswers.
 def printWeekSolution(week):
 	for day in range(DINNERS_PER_WEEK):
-		print day
-		print DINNER_DAYS[day] + ": \t" + DINNER_TIMES[week.dayAnswers[day].time]
-		print	" -- fit: " + str(week.dayAnswers[day])
+		print DINNER_DAYS[day] + ": \t" + DINNER_TIMES[week[day].time] \
+			+ " -- fit: " + str(week[day].fitness)
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	guests = People("data.dinner")
-	weekSolution = WeekAnswer
+	weekSolution = createWeekSolution(guests)
 	printOutput(guests, weekSolution)
