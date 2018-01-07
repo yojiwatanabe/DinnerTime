@@ -7,10 +7,10 @@ dinner.py
 Dinner time optimizer using a simple modified genetic annealing algorithm .
 """
 
-from numpy import zeros
-from DayAnswer import *
-from people import *
-from random import randint
+from numpy		import zeros
+from DayAnswer 	import *
+from people 	import *
+from random 	import randint
 
 POSSIBLE_TIMES		= 5 
 DINNER_TIMES		= ["6:00", "6:30", "7:00", "7:30", "8:00"]
@@ -46,11 +46,14 @@ def createSolution(people, day_id):
 # by the genetic algorithm. Takes in a People object and an array of DayAnswer
 # objects. Uses printPeople() and printWeekSolution() functions.
 def printOutput(people, week):
-	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
-	print "#\t\t\t\t\t\t\t#"
-	print "#\t\t\tDINNER\tTIME\t\t\t#"
-	print "#\t\t\t\t\t\t\t#"
-	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+	print "#   ____                                                        #" 
+	print "#  (|   \ o                                  o                  #"
+	print "#   |    |    _  _    _  _    _   ,_     _|_     _  _  _    _   #" 
+	print "#  _|    ||  / |/ |  / |/ |  |/  /  |     |  |  / |/ |/ |  |/   #" 
+	print "# (/\___/ |_/  |  |_/  |  |_/|__/   |_/   |_/|_/  |  |  |_/|__  #"
+	print "#\t\t\t\t\t\t\t\t#"
+	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 	print
 	printPeople(people)
 	print "\nCalculated dinner times:"
