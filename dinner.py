@@ -16,30 +16,6 @@ POSSIBLE_TIMES		= 5
 DINNER_TIMES		= ["6:00", "6:30", "7:00", "7:30", "8:00"]
 DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]
 
-# #				createWeekSolution()
-# #
-# # Creates an array of DayAnswer solutions to represent an entire week's worth of
-# # dinners. Uses createSolution() to generate an answer for each day. Takes in a 
-# # People object to pass to createSolution().
-# def createWeekSolution(people):
-# 	weekAnswer = []
-# 	for i in range(DINNERS_PER_WEEK):
-# 		answer = createSolution(people, DINNER_DAYS[i])
-# 		weekAnswer.append(answer)
-
-# 	return weekAnswer
-
-# #				createSolution()
-# #
-# # Creates a DayAnswer solution with a pseudorandom dinner time for a given day
-# # and already updates the fitness for the answer generated. Takes in a People
-# # object and a day_id (e.g. Monday = 0). Used by createWeekSolution().
-# def createSolution(people, day_id):
-# 	dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
-# 	answer 		= DayAnswer(dinnerTime)
-# 	answer.setFitness(people, day_id)
-# 	return answer
-
 #				variabilityFitness(weekSolution)
 #
 # Calculates the variability in people of a week solution (struct of DayAnswers)
