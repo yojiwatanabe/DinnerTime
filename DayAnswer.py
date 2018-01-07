@@ -1,3 +1,23 @@
+from random 	import randint
+
+class WeekAnswer():
+	dayAnswers 	= []
+	fitness 	= 0.0
+
+	def __init__(self):
+		self.createWeekAnswer()
+
+	def createWeekAnswer(self):
+		for i in range(DINNERS_PER_WEEK):
+			answer = createSolution(people, DINNER_DAYS[i])
+			self.dayAnswers.append(answer)
+			print i + "HERE"
+
+	def createSolution(people, day_id):
+		dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
+		answer 		= DayAnswer(dinnerTime)
+		answer.setFitness(people, day_id)
+		return answer
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Answer Object
@@ -21,4 +41,4 @@ class DayAnswer():
 			if (guest.availability[self.time] == "1"):
 				temp += 1
 				self.idList[guest.personId] = 1;
-		self.fitness = temp / guests.numPeople		
+		self.fitness = temp / guests.numPeople	
