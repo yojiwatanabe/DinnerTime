@@ -61,6 +61,7 @@ def printWeekSolution(week):
 	for day in range(DINNERS_PER_WEEK):
 		print DINNER_DAYS[day] + ": \t" + \
 			DINNER_TIMES[week.dayAnswers[day].time] + " -- fit: " + str(week.dayAnswers[day].fitness)
+	print "Week solution fitness: " + str(week.fitness)
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 

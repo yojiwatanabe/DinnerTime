@@ -14,6 +14,7 @@ class WeekAnswer():
 	def __init__(self):
 		self.people = People("data.dinner")
 		self.createWeekAnswer()
+		self.calculateFitness()
 
 	def createWeekAnswer(self):
 		for i in range(DINNERS_PER_WEEK):
@@ -25,6 +26,11 @@ class WeekAnswer():
 		answer 		= DayAnswer(dinnerTime)
 		answer.setFitness(people, day_id)
 		return answer
+
+	def calculateFitness(self):
+		for day in range(DINNERS_PER_WEEK):
+			self.fitness += self.dayAnswers[day].fitness
+		self.fitness 	= self.fitness / DINNERS_PER_WEEK
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Answer Object
