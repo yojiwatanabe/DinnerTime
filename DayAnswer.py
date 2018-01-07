@@ -1,19 +1,22 @@
 from random 	import randint
 
+DINNERS_PER_WEEK	= 4
+POSSIBLE_TIMES		= 5 
+DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]\
+
 class WeekAnswer():
 	dayAnswers 	= []
 	fitness 	= 0.0
 
-	def __init__(self):
-		self.createWeekAnswer()
+	def __init__(self, people):
+		self.createWeekAnswer(people)
 
-	def createWeekAnswer(self):
+	def createWeekAnswer(self, people):
 		for i in range(DINNERS_PER_WEEK):
-			answer = createSolution(people, DINNER_DAYS[i])
+			answer = self.createSolution(people, DINNER_DAYS[i])
 			self.dayAnswers.append(answer)
-			print i + "HERE"
 
-	def createSolution(people, day_id):
+	def createSolution(self, people, day_id):
 		dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
 		answer 		= DayAnswer(dinnerTime)
 		answer.setFitness(people, day_id)
@@ -41,4 +44,4 @@ class DayAnswer():
 			if (guest.availability[self.time] == "1"):
 				temp += 1
 				self.idList[guest.personId] = 1;
-		self.fitness = temp / guests.numPeople	
+		self.fitness = (temp * 100) / guests.numPeople	

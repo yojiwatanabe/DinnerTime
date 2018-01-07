@@ -10,7 +10,6 @@ Dinner time optimizer using a simple modified genetic annealing algorithm .
 from numpy		import zeros
 from DayAnswer 	import *
 from people 	import *
-from random 	import randint
 
 DINNERS_PER_WEEK	= 4
 POSSIBLE_TIMES		= 5 
@@ -98,13 +97,13 @@ def printPeople(people):
 # in an array of DayAnswers.
 def printWeekSolution(week):
 	for day in range(DINNERS_PER_WEEK):
-		print day
-		print DINNER_DAYS[day] + ": \t" + DINNER_TIMES[week.dayAnswers[day].time]
-		print	" -- fit: " + str(week.dayAnswers[day])
+		print DINNER_DAYS[day] + ": \t" + \
+			DINNER_TIMES[week.dayAnswers[day].time] + " -- fit: " + str(week.dayAnswers[day].fitness)
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	guests = People("data.dinner")
-	weekSolution = WeekAnswer
+	weekSolution = WeekAnswer(guests)
+	print "here"
 	printOutput(guests, weekSolution)
