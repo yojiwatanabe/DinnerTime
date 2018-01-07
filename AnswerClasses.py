@@ -1,19 +1,23 @@
+from people 	import *
 from random 	import randint
 
 DINNERS_PER_WEEK	= 4
 POSSIBLE_TIMES		= 5 
-DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]\
+DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]
+DINNER_TIMES		= ["6:00", "6:30", "7:00", "7:30", "8:00"]
 
 class WeekAnswer():
 	dayAnswers 	= []
+	people 		= []
 	fitness 	= 0.0
 
-	def __init__(self, people):
-		self.createWeekAnswer(people)
+	def __init__(self):
+		self.people = People("data.dinner")
+		self.createWeekAnswer()
 
-	def createWeekAnswer(self, people):
+	def createWeekAnswer(self):
 		for i in range(DINNERS_PER_WEEK):
-			answer = self.createSolution(people, DINNER_DAYS[i])
+			answer = self.createSolution(self.people, DINNER_DAYS[i])
 			self.dayAnswers.append(answer)
 
 	def createSolution(self, people, day_id):

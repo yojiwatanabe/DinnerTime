@@ -6,28 +6,14 @@ dinner.py
 
 Dinner time optimizer using a simple modified genetic annealing algorithm .
 """
-
-from numpy		import zeros
-from DayAnswer 	import *
-from people 	import *
-
-DINNERS_PER_WEEK	= 4
-POSSIBLE_TIMES		= 5 
-DINNER_TIMES		= ["6:00", "6:30", "7:00", "7:30", "8:00"]
-DINNER_DAYS			= ["Monday", "Tuesday", "Wednesday", "Thursday"]
-
-#				variabilityFitness(weekSolution)
-#
-# Calculates the variability in people of a week solution (struct of DayAnswers)
-# and sets the fitness of each week accordingly
-
+from AnswerClasses 	import *
 
 # 				printOutput()
 #
 # Function to print the input to the program as well as the answer generated
 # by the genetic algorithm. Takes in a People object and an array of DayAnswer
 # objects. Uses printPeople() and printWeekSolution() functions.
-def printOutput(people, week):
+def printOutput(week):
 	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 	print "#   ____                                                        #" 
 	print "#  (|   \ o                                  o                  #"
@@ -37,7 +23,7 @@ def printOutput(people, week):
 	print "#\t\t\t\t\t\t\t\t#"
 	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 	print
-	printPeople(people)
+	printPeople(week.people)
 	print "\nCalculated dinner times:"
 	printWeekSolution(week)
 
@@ -79,7 +65,6 @@ def printWeekSolution(week):
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
-	guests = People("data.dinner")
-	weekSolution = WeekAnswer(guests)
+	weekSolution = WeekAnswer()
 	print "here"
-	printOutput(guests, weekSolution)
+	printOutput(weekSolution)
