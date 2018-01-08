@@ -78,8 +78,8 @@ def printWeekSolution(week):
 if __name__  == '__main__':
 	printIntro()
 	limit = 5
-	weekSolution = []
+	weekSolution = [0] * limit
 	for i in range(limit):
 		print "WEEK %d" % i
-		weekSolution.append(WeekAnswer())
+		weekSolution[i] = WeekAnswer()
 		printOutput(weekSolution[i])

@@ -31,7 +31,6 @@ class WeekAnswer():
 		dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
 		answer 		= DayAnswer(dinnerTime)
 		answer.setFitness(people, day_id)
-		print DINNER_DAYS[day_id] + " " + str(DINNER_TIMES[answer.time])
 		return answer
 
 	def calculateFitness(self):
@@ -53,11 +52,10 @@ class WeekAnswer():
 		
 		# print("%.3f * (%.3f / 2)" % (self.fitness, var))
 		# print "pre_fit = " + str(self.fitness),
-		# print self.guestAttendance
 		self.fitness 			= self.fitness * var
 		# print "\tpost fit = " + str(self.fitness)
-
 		# print("attDiff = %i\t and var = %.3f" % (attDiff , var))
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Answer Object
 # Takes in a full line from a people file, gets information and sets it
@@ -80,4 +78,5 @@ class DayAnswer():
 			if (guest.availability[self.time + day_id * POSSIBLE_TIMES] == "1"):
 				temp += 1
 				self.idList[guest.personId] = 1;
-		self.fitness = (temp * 100) / guests.numPeople	
+		self.fitness = (temp * 100) / guests.numPeople
+		guests = [0]
