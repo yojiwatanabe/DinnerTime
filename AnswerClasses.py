@@ -1,5 +1,6 @@
 from people 	import *
 from random		import randint, seed
+import sys
 
 DINNERS_PER_WEEK	= 4
 POSSIBLE_TIMES		= 5 
@@ -15,19 +16,22 @@ class WeekAnswer():
 	def __init__(self):
 		self.guests = People("data.dinner")
 		self.createWeekAnswer()
+		# sys.stderr.write(str(self.dayAnswers[0].time))
 		self.calculateFitness()
 		self.variabilityFitness()
 
 	def createWeekAnswer(self):
+		week = [0] * DINNERS_PER_WEEK
 		for i in range(DINNERS_PER_WEEK):
 			answer = self.createSolution(self.guests, i)
-			self.dayAnswers.append(answer)
+			week[i] = answer
+		self.dayAnswers = week
 
 	def createSolution(self, people, day_id):
-		# seed(a=)
 		dinnerTime	= randint(0, POSSIBLE_TIMES - 1)
 		answer 		= DayAnswer(dinnerTime)
 		answer.setFitness(people, day_id)
+		print DINNER_DAYS[day_id] + " " + str(DINNER_TIMES[answer.time])
 		return answer
 
 	def calculateFitness(self):
@@ -49,7 +53,7 @@ class WeekAnswer():
 		
 		# print("%.3f * (%.3f / 2)" % (self.fitness, var))
 		# print "pre_fit = " + str(self.fitness),
-		print self.guestAttendance
+		# print self.guestAttendance
 		self.fitness 			= self.fitness * var
 		# print "\tpost fit = " + str(self.fitness)
 
