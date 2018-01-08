@@ -23,7 +23,7 @@ def printOutput(week):
 	print "#\t\t\t\t\t\t\t\t#"
 	print "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 	print
-	printPeople(week.people)
+	printPeople(week.guests)
 	print "\nCalculated dinner times:"
 	printWeekSolution(week)
 
@@ -60,12 +60,13 @@ def printPeople(people):
 def printWeekSolution(week):
 	for day in range(DINNERS_PER_WEEK):
 		print DINNER_DAYS[day] + ": \t" + \
-			DINNER_TIMES[week.dayAnswers[day].time] + " -- fit: " + str(week.dayAnswers[day].fitness)
+			DINNER_TIMES[week.dayAnswers[day].time] + " - Fitness: " \
+			+ str.format("{0:8.5f}", week.dayAnswers[day].fitness) + "\tAttendance by ID: " \
+			+ str(week.dayAnswers[day].idList)
 	print "Week solution fitness: " + str(week.fitness)
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	weekSolution = WeekAnswer()
-	print "here"
 	printOutput(weekSolution)
