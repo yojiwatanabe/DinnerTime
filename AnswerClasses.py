@@ -37,16 +37,22 @@ class WeekAnswer():
 		variability = []
 		for guest in self.guests.people:
 			variability.append(0)
+			
 			for i in range(DINNERS_PER_WEEK):
 				if self.dayAnswers[i].idList[guest.personId] == 1:
 					variability[guest.personId] += 1
-		attendanceDifference 	= max(variability) - min(variability)
-		var 			= 1 - 1.0/(attendanceDifference * attendanceDifference)
-		if var == 0: var = 1
+		
+		attDiff 		= max(variability) - min(variability)
+		if 	 attDiff == 0 : var = 1
+		elif attDiff == 1 : var = 0.995
+		else: 	var 	= ((1.0/(attDiff * attDiff)) / 4) + 0.75
+		
+		print("%.3f * (%.3f / 2)" % (self.fitness, var))
+		print "pre_fit = " + str(self.fitness),
 		self.fitness 	= self.fitness * var
+		print "\tpost fit = " + str(self.fitness)
 
-		print("attDiff = %i\t and var = %.4f" % (attendanceDifference, var))
-
+		print("attDiff = %i\t and var = %.3f" % (attDiff , var))
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Answer Object
 # Takes in a full line from a people file, gets information and sets it
