@@ -7,6 +7,7 @@ dinner.py
 Dinner time optimizer using a simple modified genetic annealing algorithm.
 """
 from AnswerClasses 	import *
+from packSolution 	import *
 
 # 				printIntro()
 #
@@ -70,16 +71,19 @@ def printWeekSolution(week):
 			+ str(week.dayAnswers[day].idList),
 		if (day % 2) == 1: print
 	print "Week solution fitness: " + str.format("{0:.2f}", (week.fitness)) \
-		+ " - Guest Att. " + str(week.guestAttendance[0:3]) + "\n"
+		+ " - Guest Att. " + str(week.guestAttendance[0:3])
 
+def getSolutions(num):
+	weekSolution = [0] * num
+	for i in range(num):
+		print "WEEK %d" % i
+		weekSolution[i] = WeekAnswer()
+		printOutput(weekSolution[i])
+	return weekSolution
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	printIntro()
-	limit = 5
-	weekSolution = [0] * limit
-	for i in range(limit):
-		print "WEEK %d" % i
-		weekSolution[i] = WeekAnswer()
-		printOutput(weekSolution[i])
+	solutions = getSolutions(1)
+	word = packSolution(solutions[0])
