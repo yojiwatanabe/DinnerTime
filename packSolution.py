@@ -26,8 +26,6 @@ Order of bits:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 '''
 
-MAX_DINNERS	= 8
-
 def binary(num):
     return ''.join(bin(ord(c)).replace('0b', '').rjust(8, '0') \
     	for c in struct.pack('!f', num))
@@ -38,12 +36,20 @@ def packSolution(rawSol):
 	word[1] = getSecondWord(rawSol)
 	print "Word: ",
 	print binary(word[0])
+	# print binary(word[1])
+	return word
 
 def getSecondWord(rawSol):
 	word = long(0)
-	for i in range(MAX_DINNERS):
-		mask = rawSol.dayAnswers[i] << i
-		print mask
+	for i in range(DINNERS_PER_WEEK):
+		mask = rawSol.dayAnswers[i].time << i * 3
+		word = word | mask
+		print "word[1]: " + str(word) + " mask: " + str(mask),
+		if (i % 2 == 1): print "\n"
+	return word
 
-
+def unpackSolution(wordOne, wordTwo):
+	answer 			= WeekAnswer()
+	answer.fitness 	= wordOne
+	return answer
 

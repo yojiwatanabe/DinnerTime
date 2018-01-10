@@ -87,3 +87,8 @@ if __name__  == '__main__':
 	printIntro()
 	solutions = getSolutions(1)
 	word = packSolution(solutions[0])
+	print "Got answer: " + str(word[1]) + " Fit: \t" + str(word[0])
+	print "Word: " + binary(word[0]) + binary(word[1]) 
+	unpackedAnswer	= unpackSolution(word[0], word[1])
+	print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
+ 
