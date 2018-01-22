@@ -1,5 +1,6 @@
 from people 		import *
 from AnswerClasses	import *
+from ast			import literal_eval
 import struct
 '''
 
@@ -26,30 +27,51 @@ Order of bits:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 '''
 
+FIT_MULTIPLIER 	= 10000
+
 def binary(num):
     return ''.join(bin(ord(c)).replace('0b', '').rjust(8, '0') \
     	for c in struct.pack('!f', num))
 
 def packSolution(rawSol):
-	word = [0, 0]
-	word[0] = rawSol.fitness
-	word[1] = getSecondWord(rawSol)
-	print "Word: ",
-	print binary(word[0])
-	# print binary(word[1])
+	word 		= int(rawSol.fitness * FIT_MULTIPLIER)
+	print "TYPE :" + str(type(rawSol.fitness)) + " " + str(word) + " " + bin(word)
+	word = pack32(bin(word)[2:]) + pack32(bin(getSecondWord(rawSol))[2:])
+	return word
+
+def pack32(word):
+	while len(word) < 32:
+		word = "0" + word
 	return word
 
 def getSecondWord(rawSol):
 	word = long(0)
 	for i in range(DINNERS_PER_WEEK):
 		mask = rawSol.dayAnswers[i].time << i * 3
-		word = word | mask
-		print "word[1]: " + str(word) + " mask: " + str(mask),
-		if (i % 2 == 1): print "\n"
+		word = mask | word
+		# print "time: " + str(rawSol.dayAnswers[i].time)  + "nu word: " + \
+		# 	str(word) + " mask: " + str(mask),
+		# if (i % 2 == 1): print "\n"
+	# print "word: " + str(word)
 	return word
 
-def unpackSolution(wordOne, wordTwo):
+def unpackSolution(word):
 	answer 			= WeekAnswer()
-	answer.fitness 	= wordOne
+	print "~ ~ ~ ~ UNPACKING ~ ~ ~ ~"
+	answer.fitness 	= float(literal_eval("0b" + word[0:32])) / FIT_MULTIPLIER
+	print "Unpacked fitness: " + str(answer.fitness)
+	unpackTimes(answer, word[33:64])
+
 	return answer
 
+def unpackTimes(answer, word):
+	wordVal = int(literal_eval("0b" + word))
+	for i in range(DINNERS_PER_WEEK): # Retrieve all dinner times stored in word
+		temp = (wordVal >> i * 3) & 7
+		# print str(i) + " and " + str(temp)
+		answer.dayAnswers[i].time = temp
+		
+	return answer
+
+def unpackFitness(word):
+	return float()

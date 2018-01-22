@@ -64,12 +64,14 @@ def printPeople(people):
 # Prints an array of DayAnswer objects that represent a week in dinners. Takes 
 # in an array of DayAnswers.
 def printWeekSolution(week):
+	# Loop print example: "Mon 6:00 - Fit: 100.00 - Att. [1, 1, 1, 1]"
 	for day in range(DINNERS_PER_WEEK):
-		print("{0:3.3s}".format(DINNER_DAYS[day])),
+		print("{0:3.3s}".format(DINNER_DAYS[day])), #
 		print DINNER_TIMES[week.dayAnswers[day].time] + " - Fit: " \
 			+ str.format("{0:6.2f}", week.dayAnswers[day].fitness) + " - Att. "\
-			+ str(week.dayAnswers[day].idList),
-		if (day % 2) == 1: print
+			+ str(week.dayAnswers[day].idList), 
+		if (day % 2) == 1: print # Print in two columns
+
 	print "Week solution fitness: " + str.format("{0:.2f}", (week.fitness)) \
 		+ " - Guest Att. " + str(week.guestAttendance[0:3])
 
@@ -87,8 +89,16 @@ if __name__  == '__main__':
 	printIntro()
 	solutions = getSolutions(1)
 	word = packSolution(solutions[0])
-	print "Got answer: " + str(word[1]) + " Fit: \t" + str(word[0])
-	print "Word: " + binary(word[0]) + binary(word[1]) 
-	unpackedAnswer	= unpackSolution(word[0], word[1])
+	print "Got answer: " + str(word[0:32]) + " Fit: \t" + str(word[0])
+	print "Word: " + word
+	unpackedAnswer	= unpackSolution(word)
 	print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
+	print DINNER_TIMES[unpackedAnswer.dayAnswers[0].time] \
+		+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
+	# print DINNER_TIMES[unpackedAnswer.dayAnswers[1].time] \
+		# + " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
+	# print DINNER_TIMES[unpackedAnswer.dayAnswers[2].time] \
+	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
+	# print DINNER_TIMES[unpackedAnswer.dayAnswers[3].time] \
+	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
  
