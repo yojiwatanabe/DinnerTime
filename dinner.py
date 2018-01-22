@@ -89,12 +89,12 @@ if __name__  == '__main__':
 	printIntro()
 	solutions = getSolutions(1)
 	word = packSolution(solutions[0])
-	print "Got answer: " + str(word[0:32]) + " Fit: \t" + str(word[0])
 	print "Word: " + word
 	unpackedAnswer	= unpackSolution(word)
-	print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
-	print DINNER_TIMES[unpackedAnswer.dayAnswers[0].time] \
-		+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
+	printOutput(unpackedAnswer)
+	# print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
+	# print DINNER_TIMES[unpackedAnswer.dayAnswers[0].time] \
+	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
 	# print DINNER_TIMES[unpackedAnswer.dayAnswers[1].time] \
 		# + " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
 	# print DINNER_TIMES[unpackedAnswer.dayAnswers[2].time] \
