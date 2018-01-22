@@ -1,5 +1,3 @@
-DINNERS_PER_WEEK	= 4
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # People Object
 # Takes in a filename, gets information and initializes Person class for each
@@ -14,9 +12,14 @@ class People():
 
 	def getPeople(self, filename):
 		f 		= open(filename)
-		for line in f:
-			self.people.append(Person(line, self.numPeople))
-			self.numPeople += 1
+		arr 	= []
+
+		for i, j in enumerate(f): arr.append(j)
+		self.numPeople 	= i + 1
+		self.people		= [0] * (self.numPeople)
+
+		for j in range(i + 1):
+			self.people[j] = Person(arr[j], j)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Person Object
