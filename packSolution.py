@@ -61,6 +61,7 @@ def unpackSolution(word):
 	answer.fitness 	= float(literal_eval("0b" + word[0:32])) / FIT_MULTIPLIER
 	print "Unpacked fitness: " + str(answer.fitness)
 	unpackTimes(answer, word[33:64])
+	answer.updateAttendance()
 
 	return answer
 
@@ -70,7 +71,8 @@ def unpackTimes(answer, word):
 		temp = (wordVal >> i * 3) & 7
 		# print str(i) + " and " + str(temp)
 		answer.dayAnswers[i].time = temp
-		
+		answer.dayAnswers[i].setFitness(answer.guests, i)
+
 	return answer
 
 def unpackFitness(word):

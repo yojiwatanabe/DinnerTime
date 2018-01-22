@@ -56,6 +56,12 @@ class WeekAnswer():
 		# print "\tpost fit = " + str(self.fitness)
 		# print("attDiff = %i\t and var = %.3f" % (attDiff , var))
 
+	def updateAttendance(self):
+		self.guestAttendance = [0] * self.guests.numPeople
+		for j in range(self.guests.numPeople):
+			for i in range(DINNERS_PER_WEEK):
+				if self.dayAnswers[i].idList[self.guests.people[j].personId] == 1:
+					self.guestAttendance[self.guests.people[j].personId] += 1
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Answer Object
 # Takes in a full line from a people file, gets information and sets it
