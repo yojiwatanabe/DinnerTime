@@ -30,6 +30,19 @@ Order of bits:
 
 FIT_MULTIPLIER 	= 10000
 
+#				packSolutions()
+#
+# Packs an array of WeekAnswer objects into an array of 64-character strings. 
+# This makes GA functions easier as you only store only information. Uses 
+# packSolution(). Takes in an array of WeekAnswer objects. Returns an array of
+# 64-char strings.
+def packSolutions(solutions, num):
+	toReturn = [0] * num
+	for i in range(num):
+		toReturn[i] = packSolution(solutions[i])
+
+	return toReturn
+
 #				packSolution()
 #
 # Begins packing a WeekAnswer object into a 64-character string. This will make 

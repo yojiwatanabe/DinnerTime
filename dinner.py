@@ -37,7 +37,6 @@ def printOutput(week):
 # Prints all of the people in the given People object and their personId. Also
 # prints the total number of people in the given object. Used by the 
 # printOutput() function but can be called from main for debugging.
-# TOADD: Prints when the people are available.
 def printPeople(people):
 	print "Name\t\tpersonId\tAvailability"
 
@@ -74,45 +73,19 @@ def printWeekSolution(week):
 	print "Week solution fitness: " + str.format("{0:.2f}", (week.fitness)) \
 		+ " - Guest Att. " + str(week.guestAttendance[0:3])
 
-def getSolutions(num):
-	weekSolution = [0] * num
-	for i in range(num):
-		print "WEEK %d" % i
-		weekSolution[i] = WeekAnswer()
-		# printOutput(weekSolution[i])
-	return weekSolution
-
-def packSolutions(solutions, num):
-	toReturn = [0] * num
-	for i in range(num):
-		toReturn[i] = packSolution(solutions[i])
-
-	return toReturn
-
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	printIntro()
-	solutions = getSolutions(5)
-	words = packSolutions(solutions, 5)
-	printWeekSolution(solutions[4])
-	print "Word: " + words[0]
-	# unpackedAnswer	= unpackSolution(words[4])
-	# printOutput(unpackedAnswer)
+	rawSolutions 	= getSolutions(POPULATION_SIZE)
+	words 			= packSolutions(rawSolutions, POPULATION_SIZE)
+	newGeneration 	= passGeneration(words)
+	# printWeekSolution(newGeneration[4])
+
 	ranked = rankSolutions(words)
-	printOutput(unpackSolution(ranked[0]))
-	printOutput(unpackSolution(ranked[1]))
-	printOutput(unpackSolution(ranked[2]))
-	printOutput(unpackSolution(ranked[3]))
-	printOutput(unpackSolution(ranked[4]))
-	# print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[0].time] \
-	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[1].time] \
-		# + " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[2].time] \
-	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[3].time] \
-	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
- 
+	
+	# printOutput(unpackSolution(ranked[0]))
+	for i in range(10):
+		printOutput(unpackSolution(ranked[i]))
+		print "Word: " + words[i]

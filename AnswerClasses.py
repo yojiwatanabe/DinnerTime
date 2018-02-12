@@ -16,7 +16,6 @@ class WeekAnswer():
 	def __init__(self):
 		self.guests = People("data.dinner")
 		self.createWeekAnswer()
-		# sys.stderr.write(str(self.dayAnswers[0].time))
 		self.calculateFitness()
 		self.variabilityFitness()
 
