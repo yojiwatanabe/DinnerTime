@@ -75,13 +75,20 @@ def getSecondWord(rawSol):
 def unpackSolution(word):
 	# print "~ ~ ~ ~ UNPACKING ~ ~ ~ ~"
 	answer 			= WeekAnswer()
-	answer.fitness 	= float(literal_eval("0b" + word[0:32])) / FIT_MULTIPLIER
+	answer.fitness 	= unpackFitness(word)
 	# print "Unpacked fitness: " + str(answer.fitness)
 	
 	unpackTimes(answer, word[33:64])
 	answer.updateAttendance()
 
 	return answer
+
+#				unpackFitness()
+#
+# Unpacks the fitness stored in a 64-char string and returns it as a float. Used
+# by unpackSolution and rankSolutions in GeneticAlgs.py.
+def unpackFitness(word):
+	return float(literal_eval("0b" + word[0:32])) / FIT_MULTIPLIER
 
 #				unpackTimes()
 #

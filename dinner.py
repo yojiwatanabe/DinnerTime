@@ -6,8 +6,7 @@ dinner.py
 
 Dinner time optimizer using a simple modified genetic annealing algorithm.
 """
-from AnswerClasses 	import *
-from packSolution 	import *
+from GeneticAlg		import *
 
 # 				printIntro()
 #
@@ -80,18 +79,33 @@ def getSolutions(num):
 	for i in range(num):
 		print "WEEK %d" % i
 		weekSolution[i] = WeekAnswer()
-		printOutput(weekSolution[i])
+		# printOutput(weekSolution[i])
 	return weekSolution
+
+def packSolutions(solutions, num):
+	toReturn = [0] * num
+	for i in range(num):
+		toReturn[i] = packSolution(solutions[i])
+
+	return toReturn
+
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	printIntro()
-	solutions = getSolutions(1)
-	word = packSolution(solutions[0])
-	print "Word: " + word
-	unpackedAnswer	= unpackSolution(word)
-	printOutput(unpackedAnswer)
+	solutions = getSolutions(5)
+	words = packSolutions(solutions, 5)
+	printWeekSolution(solutions[4])
+	print "Word: " + words[0]
+	# unpackedAnswer	= unpackSolution(words[4])
+	# printOutput(unpackedAnswer)
+	ranked = rankSolutions(words)
+	printOutput(unpackSolution(ranked[0]))
+	printOutput(unpackSolution(ranked[1]))
+	printOutput(unpackSolution(ranked[2]))
+	printOutput(unpackSolution(ranked[3]))
+	printOutput(unpackSolution(ranked[4]))
 	# print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
 	# print DINNER_TIMES[unpackedAnswer.dayAnswers[0].time] \
 	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
