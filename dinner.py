@@ -5,6 +5,8 @@ Dinner Time Optimizer
 dinner.py
 
 Dinner time optimizer using a simple modified genetic annealing algorithm.
+
+TO-DO: Sort out the fact that [3,3,3] is treated as better 
 """
 from GeneticAlg		import *
 
@@ -78,14 +80,12 @@ def printWeekSolution(week):
 
 if __name__  == '__main__':
 	printIntro()
-	rawSolutions 	= getSolutions(POPULATION_SIZE)
-	words 			= packSolutions(rawSolutions, POPULATION_SIZE)
-	newGeneration 	= passGeneration(words)
-	# printWeekSolution(newGeneration[4])
-
-	ranked = rankSolutions(words)
-	
+	# rawSolutions 	= getSolutions(POPULATION_SIZE)
+	# words 			= packSolutions(rawSolutions, POPULATION_SIZE)
+	# newGeneration 	= passGeneration(words)
+	# # printWeekSolution(newGeneration[4])
+	answers = startCycle()
+	# ranked = rankSolutions(words)
 	# printOutput(unpackSolution(ranked[0]))
-	for i in range(10):
-		printOutput(unpackSolution(ranked[i]))
-		print "Word: " + words[i]
+	for i in range(NUM_ANSWERS):
+		printOutput(answers[i])
