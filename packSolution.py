@@ -30,6 +30,19 @@ Order of bits:
 
 FIT_MULTIPLIER 	= 10000
 
+#				packSolutions()
+#
+# Packs an array of WeekAnswer objects into an array of 64-character strings. 
+# This makes GA functions easier as you only store only information. Uses 
+# packSolution(). Takes in an array of WeekAnswer objects. Returns an array of
+# 64-char strings.
+def packSolutions(solutions, num):
+	toReturn = [0] * num
+	for i in range(num):
+		toReturn[i] = packSolution(solutions[i])
+
+	return toReturn
+
 #				packSolution()
 #
 # Begins packing a WeekAnswer object into a 64-character string. This will make 
@@ -75,13 +88,20 @@ def getSecondWord(rawSol):
 def unpackSolution(word):
 	# print "~ ~ ~ ~ UNPACKING ~ ~ ~ ~"
 	answer 			= WeekAnswer()
-	answer.fitness 	= float(literal_eval("0b" + word[0:32])) / FIT_MULTIPLIER
+	answer.fitness 	= unpackFitness(word)
 	# print "Unpacked fitness: " + str(answer.fitness)
 	
 	unpackTimes(answer, word[33:64])
 	answer.updateAttendance()
 
 	return answer
+
+#				unpackFitness()
+#
+# Unpacks the fitness stored in a 64-char string and returns it as a float. Used
+# by unpackSolution and rankSolutions in GeneticAlgs.py.
+def unpackFitness(word):
+	return float(literal_eval("0b" + word[0:32])) / FIT_MULTIPLIER
 
 #				unpackTimes()
 #

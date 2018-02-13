@@ -5,9 +5,11 @@ Dinner Time Optimizer
 dinner.py
 
 Dinner time optimizer using a simple modified genetic annealing algorithm.
+
+TO-DO: Sort out the fact that [3,3,3] is treated as better 
 """
-from AnswerClasses 	import *
-from packSolution 	import *
+import argparse
+from GeneticAlg		import *
 
 # 				printIntro()
 #
@@ -38,7 +40,6 @@ def printOutput(week):
 # Prints all of the people in the given People object and their personId. Also
 # prints the total number of people in the given object. Used by the 
 # printOutput() function but can be called from main for debugging.
-# TOADD: Prints when the people are available.
 def printPeople(people):
 	print "Name\t\tpersonId\tAvailability"
 
@@ -75,30 +76,22 @@ def printWeekSolution(week):
 	print "Week solution fitness: " + str.format("{0:.2f}", (week.fitness)) \
 		+ " - Guest Att. " + str(week.guestAttendance[0:3])
 
-def getSolutions(num):
-	weekSolution = [0] * num
-	for i in range(num):
-		print "WEEK %d" % i
-		weekSolution[i] = WeekAnswer()
-		printOutput(weekSolution[i])
-	return weekSolution
 		
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 if __name__  == '__main__':
 	printIntro()
-	solutions = getSolutions(1)
-	word = packSolution(solutions[0])
-	print "Word: " + word
-	unpackedAnswer	= unpackSolution(word)
-	printOutput(unpackedAnswer)
-	# print "Unpacked Fit: \t" + str(unpackedAnswer.fitness)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[0].time] \
-	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[1].time] \
-		# + " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[2].time] \
-	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
-	# print DINNER_TIMES[unpackedAnswer.dayAnswers[3].time] \
-	# 	+ " - Att. " + str(unpackedAnswer.dayAnswers[0].idList)
- 
+
+	parser = argparse.ArgumentParser(description='DinnerTime application. '
+			 'www.github.com/ywatanabe/DinnerTime')
+	parser.add_argument('-c', type = int, default = 10,   dest = 'cycles',
+                   help = 'number of cycles. default = 10)')
+	parser.add_argument('-p', type = int, default = 1000, dest = 'popSize',
+                   help = 'size of the population. default = 1000')
+	args = parser.parse_args()
+
+	answers = startCycle(args.cycles, args.popSize)
+
+	for i in range(NUM_ANSWERS):
+		printOutput(answers[i])
+

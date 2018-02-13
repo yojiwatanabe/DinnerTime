@@ -16,7 +16,6 @@ class WeekAnswer():
 	def __init__(self):
 		self.guests = People("data.dinner")
 		self.createWeekAnswer()
-		# sys.stderr.write(str(self.dayAnswers[0].time))
 		self.calculateFitness()
 		self.variabilityFitness()
 
@@ -47,14 +46,10 @@ class WeekAnswer():
 		
 		attDiff 		= max(self.guestAttendance) - min(self.guestAttendance)
 		if 	 attDiff == 0 : var = 1
-		elif attDiff == 1 : var = 0.995
+		elif attDiff == 1 : var = 0.99995
 		else: 	var 	= ((1.0/(attDiff * attDiff)) / 4) + 0.75
 		
-		# print("%.3f * (%.3f / 2)" % (self.fitness, var))
-		# print "pre_fit = " + str(self.fitness),
 		self.fitness 			= self.fitness * var
-		# print "\tpost fit = " + str(self.fitness)
-		# print("attDiff = %i\t and var = %.3f" % (attDiff , var))
 
 	def updateAttendance(self):
 		self.guestAttendance = [0] * self.guests.numPeople
