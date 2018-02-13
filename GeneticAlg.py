@@ -23,19 +23,19 @@ CULL_RATIO		 	= 0.8
 # Begins a new population of WeekAnswers to put through the genetic algorithm.
 # Generates solutions, packs them, and begins passing through each generation,
 # applying the given mutations and crossovers.
-def startCycle():
-	rawSolutions 	= getSolutions(POPULATION_SIZE)
-	packedSolutions = packSolutions(rawSolutions, POPULATION_SIZE)
+def startCycle(endGen, populationSize):
+	rawSolutions 	= getSolutions(populationSize)
+	packedSolutions = packSolutions(rawSolutions, populationSize)
 	gen  			= INIT_GEN
 
-	while (stopConditionsMet(gen, packedSolutions) == False):
-		passGeneration(packedSolutions)
+	while (stopConditionsMet(gen, endGen, packedSolutions) == False):
+		passGeneration(packedSolutions, populationSize)
 		gen += 1
 
-	return getNBestAnswers(NUM_ANSWERS, packedSolutions)
+	return getNBestAnswers(NUM_ANSWERS, packedSolutions, populationSize)
 
-def stopConditionsMet(gen, words):
-	if (gen > END_GEN):
+def stopConditionsMet(gen, endGen, words):
+	if (gen > endGen):
 		print "Reached end generation"
 		return True
 	elif (unpackFitness(words[0]) == PERFECT_SCORE):
@@ -43,9 +43,9 @@ def stopConditionsMet(gen, words):
 		return True
 	return False
 
-def passGeneration(solutions):
-	solutions		= rankSolutions(solutions)
-	variateDNA(solutions)
+def passGeneration(solutions, populationSize):
+	solutions		= rankSolutions(solutions, populationSize)
+	variateDNA(solutions, populationSize)
 
 	return solutions
 
@@ -55,27 +55,27 @@ def getSolutions(num):
 		weekSolution[i] = WeekAnswer()
 	return weekSolution
 
-def rankSolutions(solutions):
-	fitness = [0] * (POPULATION_SIZE)
-	for i in range(POPULATION_SIZE):
+def rankSolutions(solutions, populationSize):
+	fitness = [0] * (populationSize)
+	for i in range(populationSize):
 		fitness[i] = unpackFitness(solutions[i])
 
 	sortedSols = [x for _,x in sorted(zip(fitness, solutions), reverse = True)]
 	return sortedSols
 
-def variateDNA(solutions):
-	numNewDNA 	= int(ceil(POPULATION_SIZE * (1 - CULL_RATIO)))
+def variateDNA(solutions, populationSize):
+	numNewDNA 	= int(ceil(populationSize * (1 - CULL_RATIO)))
 	newDNA 		= getSolutions(numNewDNA)
 	packedDNA 	= packSolutions(newDNA, numNewDNA)
 
 	for i in range(numNewDNA):
-		solutions[POPULATION_SIZE - i - 1] = packedDNA[i]
+		solutions[populationSize - i - 1] = packedDNA[i]
 
 	return
 
-def getNBestAnswers(numAnswers, solutions):
-	solutions = rankSolutions(solutions)
-	toReturn = [0] * numAnswers
+def getNBestAnswers(numAnswers, solutions, populationSize):
+	solutions 	= rankSolutions(solutions, populationSize)
+	toReturn 	= [0] * numAnswers
 
 	for i in range(numAnswers):
 		toReturn[i] = unpackSolution(solutions[i])
