@@ -8,6 +8,7 @@ Dinner time optimizer using a simple modified genetic annealing algorithm.
 
 TO-DO: Sort out the fact that [3,3,3] is treated as better 
 """
+import argparse
 from GeneticAlg		import *
 
 # 				printIntro()
@@ -80,12 +81,17 @@ def printWeekSolution(week):
 
 if __name__  == '__main__':
 	printIntro()
-	# rawSolutions 	= getSolutions(POPULATION_SIZE)
-	# words 			= packSolutions(rawSolutions, POPULATION_SIZE)
-	# newGeneration 	= passGeneration(words)
-	# # printWeekSolution(newGeneration[4])
-	answers = startCycle()
-	# ranked = rankSolutions(words)
-	# printOutput(unpackSolution(ranked[0]))
+
+	parser = argparse.ArgumentParser(description='DinnerTime application. '
+			 'www.github.com/ywatanabe/DinnerTime')
+	parser.add_argument('-c', type = int, default = 10,   dest = 'cycles',
+                   help = 'number of cycles. default = 10)')
+	parser.add_argument('-p', type = int, default = 1000, dest = 'popSize',
+                   help = 'size of the population. default = 1000')
+	args = parser.parse_args()
+
+	answers = startCycle(args.cycles, args.popSize)
+
 	for i in range(NUM_ANSWERS):
 		printOutput(answers[i])
+
