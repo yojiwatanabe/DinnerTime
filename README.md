@@ -1,13 +1,13 @@
-# DINNER TIME
+# DINNERTIME
 ### Written by Yoji Watanabe - Fall 2017
-_Dinner Time_ is a small application that allows users to find the optimal dinner time for people with varying availabilities.
+_DinnerTime_ is a script that helps users to find the optimal meeting ('dinner') times for people with varying availabilities.
 ***
 
 #### Current Features
 * Randomly assign dinner times for a week of dinners and check availability of guests
 * Evaluate how good these dinner times are based on guest availability and variability
-* Pack information about guest availability & variability at dinners and the dinner times in a 64-character string of bits
-* Retrieve all of a week's dinners information from a 64-char string
+* Pack information about guest availability & variability at dinners and the dinner times in a 64-bit string of bits
+* Retrieve all of a week's dinners information from a 64-bit string
 
 #### Inputting data
 
